@@ -3,10 +3,19 @@ import { FaHome, FaStar, FaMicrophone } from 'react-icons/fa';
 import { FiImage } from 'react-icons/fi';
 import { AiFillEdit } from "react-icons/ai";
 import Search from './Search';
+import NoteModal from './Modal';
+import ImageUploadModal from './ImageUploadModal';
 
 export default function Notes() {
   const [recording, setRecording] = useState(false);
+  const [isModalOpen, setIsModalOpen]= useState(false)
+  const [isImageUploadOpen, setIsImageUploadOpen] = useState(false);
 
+  const openModal =()=>setIsModalOpen(true)
+  const closeModal =()=>setIsModalOpen(false)
+
+  const ImageOpenModal=()=>setIsImageUploadOpen(true)
+  const ImageCloseModal=()=>setIsImageUploadOpen(false)
   return (
     <div className="flex h-screen bg-gray-50 font-sans">
       {/* Sidebar */}
@@ -71,13 +80,14 @@ export default function Notes() {
 
       {/* Bottom Button Container */}
       <div className="fixed bottom-2 left-[32%] right-20 bg-white border-t border-gray-200 py-4 px-8 flex justify-between items-center shadow-lg rounded-full">
+       
         {/* Create and Upload Buttons */}
         <div className="flex gap-8">
-          <button className="flex flex-col items-center text-gray-700 hover:text-purple-600 transition">
+          <button onClick={openModal} className="flex flex-col items-center text-gray-700 hover:text-purple-600 transition">
             <AiFillEdit  className="text-2xl mb-1" />
             <span className="text-xs">Create</span>
           </button>
-          <button className="flex flex-col items-center text-gray-700 hover:text-purple-600 transition">
+          <button onClick={ImageOpenModal} className="flex flex-col items-center text-gray-700 hover:text-purple-600 transition">
             <FiImage className="text-2xl mb-1" />
             <span className="text-xs">Upload</span>
           </button>
@@ -93,6 +103,9 @@ export default function Notes() {
           
         </button>
       </div>
+       {/* Render Modal if open */}
+       {isModalOpen && <NoteModal onClose={closeModal} />}
+       {isImageUploadOpen && <ImageUploadModal onClose={ImageCloseModal} />}
     </div>
   );
 }

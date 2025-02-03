@@ -1,5 +1,5 @@
 import Notes from "./component/Notes";
-import Login from "./login";
+// import Login from "./login";
 
 
 
@@ -8,8 +8,9 @@ import Login from "./login";
 function App() {
   return (
     <>
-    <Login/>
+    {/* <Login/> */}
     <Notes/>
+   
     </>
   )
 }
